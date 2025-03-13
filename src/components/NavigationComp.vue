@@ -1,118 +1,96 @@
 <script>
-import { RouterLink } from 'vue-router';
-import { useAuthStore } from '../stores/useAuthStore';
+  import { RouterLink } from 'vue-router';
+  import { useAuthStore } from '../stores/useAuthStore';
 
-export default {
-  data() {
-    return {
-      authStore: useAuthStore(),
-      isMobile: window.innerWidth <= 470
+  export default {
+    data() {
+      return {
+        authStore: useAuthStore()
+      };
+    },
+    computed: {
+      currentUser() {
+        return this.authStore.currentUser;
+      }
     }
-  },
-  computed: {
-    currentUser() {
-      return this.authStore.currentUser
-    },
-  },
-  methods: {
-    updateView() {
-      this.isMobile = window.innerWidth <= 470
-    },
-  },
-  mounted() {
-    window.addEventListener('resize', this.updateView)
-  },
-  beforeUnmount() {
-    window.removeEventListener('resize', this.updateView)
-  }
-}
+  };
 </script>
 <template>
-  <nav :class="{ 'nav-top': !isMobile, 'nav-bottom': isMobile }">
-    <ul id="nav-ul">
-      <li>
-        <a v-if="currentUser" class="nav-links" href="#" @click.prevent="authStore.logout()">Logga ut</a>
-        <a v-else class="nav-links" href="#/login">Logga in</a>
-      </li>
-      <li class="nav-links">
-        <RouterLink to="/tutorial/introduktion">Övningar</RouterLink>
-      </li>
-      <li class="nav-links" >
-        <RouterLink to="/">Quiz</RouterLink>
-      </li>
-      <li class="nav-links">
-        <RouterLink to="/scoretable">Ledartavla</RouterLink>
-      </li>
-      <li class="nav-links">
-        <RouterLink to="/information">Information</RouterLink>
-      </li>
-    </ul>
+  <nav>
+    <a
+      v-if="currentUser"
+      class="nav-links"
+      href="#"
+      @click.prevent="authStore.logout()"
+      >Logga ut</a
+    >
+    <a v-else class="nav-links" href="#/login">Logga in</a>
+    <RouterLink class="nav-links" to="/tutorial/introduktion"
+      >Övningar</RouterLink
+    >
+    <RouterLink class="nav-links" to="/">Hem</RouterLink>
+
+    <RouterLink class="nav-links" to="/scoretable">Highscore</RouterLink>
+
+    <RouterLink class="nav-links" to="/information">Länkar</RouterLink>
   </nav>
-  <main :class="{'main-desktop': !isMobile, 'main-mobile': isMobile}">
-    <RouterView />
-  </main>
 </template>
 
 <style scoped>
-.main-desktop{
-margin-top: 3rem;
-}
+  nav {
+    display: flex;
+    justify-content: center;
 
-.main-mobile{
-  margin-bottom: 3rem;
-}
+    align-items: center;
+    position: sticky;
+    width: 100%;
+    height: 50px;
+    padding: 0.5rem 0;
+    background-color: #333;
+    color: whitesmoke;
+    margin: 0;
+    padding: 0;
 
-nav {
-  position: fixed;
-  width: 100%;
-  padding: 0.5rem 0;
-  background-color: #333;
-  color: whitesmoke;
-}
-
-.nav-top {
-  top: 0;
-  left: 0;
-}
-
-.nav-bottom {
-  bottom: 0;
-  left: 0;
-}
-
-#nav-ul {
-  display: flex;
-  flex-direction: row;
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  align-content: center;
-  justify-content: space-around;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  height: 1.5rem;
-  padding: 0.3rem 1rem;
-  border-radius: 6px;
-}
-
-.nav-links:hover {
-  cursor: pointer;
-  background-color: #555;
-}
-
-@media screen and (max-width: 470px) {
-
-  #nav-ul {
-    font-size: small;
+    justify-content: space-around;
   }
 
   .nav-links {
-    height: 1rem;
-    padding: 0.3rem 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    font-size: 1rem;
+    border-right: 1px solid rgb(139, 139, 139);
+    text-align: center;
   }
 
-}
+  .nav-links:hover {
+    cursor: pointer;
+    background-color: #555;
+  }
+
+  @media screen and (min-width: 470px) {
+    nav {
+      display: flex;
+      justify-content: center;
+
+      align-items: center;
+      position: fixed;
+      top: 0;
+      /* left: 0;
+      right: 0; */
+      bottom: 0;
+      width: 100%;
+      height: 50px;
+      padding: 0.5rem 0;
+      background-color: #333;
+      color: whitesmoke;
+      margin: 0;
+      padding: 0;
+
+      justify-content: space-around;
+    }
+  }
 </style>

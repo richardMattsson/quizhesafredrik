@@ -17,9 +17,4 @@
   <QuestionComp :results="results" />
 </template>
 
-<style scoped>
-  .container-questions {
-    height: 100vh;
-    margin-bottom: auto;
-  }
-</style>
+<style scoped></style>

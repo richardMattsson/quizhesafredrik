@@ -4,6 +4,6 @@ import vue from '@vitejs/plugin-vue';
 import vueDevTools from 'vite-plugin-vue-devtools';
 
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/hesafredrik/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/quizhesafredrik/' : '/',
   plugins: [vue(), vueDevTools()]
 });
