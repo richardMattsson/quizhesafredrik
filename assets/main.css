@@ -1,0 +1,34 @@
+html,
+body {
+  background-color: #333;
+  font-family: sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: whitesmoke;
+  text-decoration: none;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  background-color: #ffda00;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* flex-grow: 1; */
+}
+
+.start-button {
+  width: 7rem;
+  height: 3rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
